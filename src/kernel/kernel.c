@@ -8,11 +8,6 @@ void main() {
     init_gdt();
     init_idt();
     init_interrupts();
-	asm volatile("sti");
-
-	int a = 1;
-    int b = 0;
-    int c = a / b;
-
+    asm volatile("sti");
     screen_write("Hello world!\n");
 }
