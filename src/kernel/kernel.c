@@ -3,8 +3,6 @@
 #include "kernel/arch/i386/idt.h"
 #include "kernel/arch/i386/interrupts.h"
 
-extern void enable_paging();
-
 void main() {
     screen_clear(); // Limpia la pantalla
     init_gdt(); // Habilita la GDT
