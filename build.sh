@@ -17,6 +17,10 @@ cd ..
 cd ..
 cd ..
 cd ..
-ld -m elf_i386 -T linker.ld -o kernel.elf src/boot.o src/kernel/kernel.o src/kernel/screen.o src/kernel/arch/i386/gdta.o src/kernel/arch/i386/gdt.o src/kernel/arch/i386/idta.o src/kernel/arch/i386/idt.o src/kernel/panic.o src/kernel/arch/i386/interruptsa.o src/kernel/arch/i386/interrupts.o src/kernel/stdlib.o
+ld -m elf_i386 -T linker.ld -o kernel.elf src/boot.o src/kernel/kernel.o src/kernel/screen.o src/kernel/arch/i386/gdta.o src/kernel/arch/i386/gdt.o src/kernel/arch/i386/idta.o src/kernel/arch/i386/idt.o src/kernel/panic.o src/kernel/arch/i386/interruptsa.o src/kernel/arch/i386/interrupts.o src/kernel/stdlib.o 
 mv kernel.elf iso/boot/
-grub-mkrescue -o jaidenos.iso iso/
+grub-mkrescue -o jaidenix.iso iso/
+
+# In Red Hat based Linux systems grub-mkrescue is grub2-mkrescue. 
+
+grub2-mkrescue -o jaidenix.iso iso/
