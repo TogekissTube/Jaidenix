@@ -26,26 +26,29 @@ Works on real hardware.
 - [ ] /dev file system
 - [ ] /proc file system
 - [ ] Shell
+- [ ] PS/2 Mouse
 - [ ] /dev/pts file system
 - [ ] Shutdown and Reboot
 - [ ] Commands (ls, pwd, rm, mv, cp, mknod, etc...)
-- [ ] C++ library
 - [ ] Login and configuration files such as /etc/passwd, /etc/group, etc.
+- [ ] Unix-like signals
 - [ ] SMP
 - [ ] PCI drivers
+- [ ] Time
 
 ### Milestone 3: Self-hosting Jaidenix system and some ports
 
 - [ ] Port binutils.
 - [ ] Port GCC.
 - [ ] Port NASM.
-- [ ] Port Make (in future Sh build system will be replaced by Makefiles)
+- [ ] Port Make (in future the current Bash build system will be replaced by Makefiles)
 - [ ] Port ncurses
 - [ ] Port nano
 - [ ] Recompile the OS under itself
 - [ ] Of course, will port DOOM + Graphics driver
+- [ ] Porting Quake :D
       
-### Milestone 4: Networking
+### Milestone 4: Networking.
 
 - [ ] Ethernet (NE2000, AMD PCNet)
 - [ ] DHCP driver
@@ -57,7 +60,7 @@ Works on real hardware.
 - [ ] Port wget
 - [ ] Port git
 - [ ] Port ssh
-- [ ] Package manager
+- [ ] Package manager and repository setup
 
  ### Milestone 5: USB:
 
@@ -66,3 +69,21 @@ Works on real hardware.
 - [ ] USB devices (keyboard and mice)
 - [ ] USB storage
 - [ ] USB Ethernet drivers
+
+### Milestone 6: GUI
+
+- [ ] Display Manager
+- [ ] Session Manager
+- [ ] Window Manager
+- [ ] Panel (Like Windows XP)
+- [ ] Graphical Terminal Emulator
+- [ ] Graphical File Manager
+- [ ] Graphical Text Editor
+- [ ] Graphical Image Viewer
+- [ ] Package manager with GUI
+
+### Milestone 7: The future:
+
+- [ ] Porting to x86_64
+- [ ] KVM
+- [ ] WiFi
