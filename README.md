@@ -18,6 +18,7 @@ Works on real hardware.
 - [ ] Mount root
 - [ ] Multitasking
 - [ ] Switching to user mode
+- [ ] System Calls
 
 ### Milestone 2: User-space and more functionality to kernel:
 
@@ -25,6 +26,7 @@ Works on real hardware.
 - [ ] C Library
 - [ ] /dev file system
 - [ ] /proc file system
+- [ ] PCI
 - [ ] Shell
 - [ ] PS/2 Mouse
 - [ ] /dev/pts file system
@@ -33,6 +35,7 @@ Works on real hardware.
 - [ ] Login and configuration files such as /etc/passwd, /etc/group, etc.
 - [ ] Unix-like signals
 - [ ] SMP
+- [ ] ACPI or uACPI
 - [ ] PCI drivers
 - [ ] Time
 
@@ -87,3 +90,4 @@ Works on real hardware.
 - [ ] Porting to x86_64
 - [ ] KVM
 - [ ] WiFi
+- [ ] Web browser from scratch
