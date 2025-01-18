@@ -1,4 +1,5 @@
 #include "bootservices.h"
+#include "util/printf/printf.h"
 #include <stdint.h>
 
 #define STRING_MAX_SIZE 65536
@@ -18,14 +19,9 @@ void hlt() {
     }
 }
 
-// Función para imprimir una cadena en la terminal
-void print(const char* str) {
-    void (*writer)(const char*, uint64_t) = get_terminal_write();
-    writer(str, strlen(str));  // Pasar la cadena a strlen
-}
 
 // Punto de entrada del kernel
 void _start() {
-    print("Hello world!");
+    printf("Hello world!");
     hlt();
 }

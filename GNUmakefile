@@ -90,7 +90,6 @@ override CFLAGS +=       \
 override CFLAGS += $(CEXTRA)
 
 override LDFLAGS +=         \
-    -nostdlib               \
     -static                 \
     -z max-page-size=0x1000 \
     -T linker.ld
