@@ -1,5 +1,6 @@
-#include "bootservices.h"
+#include "boot/bootservices.h"
 #include "util/printf/printf.h"
+#include "mm/memory.h"
 #include <stdint.h>
 
 #define STRING_MAX_SIZE 65536
@@ -22,6 +23,7 @@ void hlt() {
 
 // Punto de entrada del kernel
 void _start() {
+    init_memory();
     printf("Hello world!");
     hlt();
 }

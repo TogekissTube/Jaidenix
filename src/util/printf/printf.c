@@ -1,6 +1,5 @@
-
 #include "printf.h"
-#include "../../bootservices.h"
+#include "../../boot/bootservices.h"
 #include <stdint.h>
 #include <stdarg.h> // Necesario para va_list, va_start, va_end
 
@@ -22,21 +21,25 @@ static void puts(const char *str) {
     }
 }
 
-// Función auxiliar para imprimir números enteros
-static void print_number(int num) {
-    if (num < 0) {
-        putchar_('-');
-        num = -num;
-    }
-
-    char buffer[10];
+// Función auxiliar para imprimir números en cualquier base
+static void print_number_base(uint64_t num, int base, int uppercase) {
+    const char *digits = uppercase ? "0123456789ABCDEF" : "0123456789abcdef";
+    char buffer[64];
     int i = 0;
 
-    do {
-        buffer[i++] = '0' + (num % 10);
-        num /= 10;
-    } while (num > 0);
+    // Si el número es 0, imprimimos "0" directamente
+    if (num == 0) {
+        putchar_('0');
+        return;
+    }
 
+    // Convertimos el número a la base especificada
+    while (num > 0) {
+        buffer[i++] = digits[num % base];
+        num /= base;
+    }
+
+    // Imprimimos en orden inverso
     while (i--) {
         putchar_(buffer[i]);
     }
@@ -55,7 +58,17 @@ int printf(const char *format, ...) {
                 puts(str);
             } else if (*format == 'd') {
                 int num = va_arg(args, int);
-                print_number(num);
+                if (num < 0) {
+                    putchar_('-');
+                    num = -num;
+                }
+                print_number_base((uint64_t)num, 10, 0);
+            } else if (*format == 'x') {
+                uint32_t num = va_arg(args, uint32_t);
+                print_number_base(num, 16, 0);
+            } else if (*format == 'X') {
+                uint32_t num = va_arg(args, uint32_t);
+                print_number_base(num, 16, 1);
             } else {
                 putchar_('%');
                 putchar_(*format);
@@ -78,7 +91,6 @@ int snprintf(char *buffer, size_t count, const char *format, ...) {
     va_list args;
     va_start(args, format);
 
-    // Crear un puntero para escribir en el buffer
     char *buf_ptr = buffer;
     size_t written = 0;
 
@@ -93,7 +105,7 @@ int snprintf(char *buffer, size_t count, const char *format, ...) {
                 }
             } else if (*format == 'd') {
                 int num = va_arg(args, int);
-                char temp[10];
+                char temp[20];
                 int temp_len = 0;
 
                 if (num < 0) {
@@ -107,6 +119,21 @@ int snprintf(char *buffer, size_t count, const char *format, ...) {
                 do {
                     temp[temp_len++] = '0' + (num % 10);
                     num /= 10;
+                } while (num > 0);
+
+                while (temp_len-- > 0 && written < count - 1) {
+                    *buf_ptr++ = temp[temp_len];
+                    written++;
+                }
+            } else if (*format == 'x' || *format == 'X') {
+                uint32_t num = va_arg(args, uint32_t);
+                char temp[20];
+                int temp_len = 0;
+                const char *digits = (*format == 'X') ? "0123456789ABCDEF" : "0123456789abcdef";
+
+                do {
+                    temp[temp_len++] = digits[num % 16];
+                    num /= 16;
                 } while (num > 0);
 
                 while (temp_len-- > 0 && written < count - 1) {
@@ -130,7 +157,7 @@ int snprintf(char *buffer, size_t count, const char *format, ...) {
         format++;
     }
 
-    *buf_ptr = '\0'; // Terminar la cadena
+    *buf_ptr = '\0';
     va_end(args);
     return written;  // Devuelve el número de caracteres escritos (sin incluir el terminador).
 }
